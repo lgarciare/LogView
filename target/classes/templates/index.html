@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Log View</title>
+
+<!--JQUERY-->
+<script src="js/jquery.min.js"></script>
+<!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+<link rel="stylesheet" type="text/css"
+	href="static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+<script src="js/bootstrap.min.js"></script>
+
+<!-- Los iconos tipo Solid de Fontawesome-->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+<script src="js/all.js"></script>
+
+<!-- Nuestro css-->
+<link rel="stylesheet" type="text/css" href="static/css/index.css"
+	th:href="@{/css/index.css}">
+
+
+<!-- <link rel="stylesheet" type="text/css" href="static/css/datepicker.css" -->
+<!-- 	th:href="@{/css/datepicker.css}"> -->
+<!-- <script src="js/bootstrap-datepicker.js"></script> -->
+<!-- <link -->
+<!-- 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet" /> -->
+	<link rel="stylesheet" type="text/css" href="static/css/bootstrap-datepicker.min.css" th:href="@{/css/bootstrap-datepicker.min.css}">
+	<script src="js/bootstrap-datepicker.min.js"></script>
+
+	<style type="text/css">
+		solution 1:
+    					.datepicker {
+				font-size: 0.875em;
+		}
+		.datepicker td, .datepicker th {
+		width: 2.25em;
+		height: 2.25em;
+		}
+	</style>
+
+</head>
+<body>
+	<div class="modal-dialog text-center">
+		<div class="col-sm-8 main-section">
+			<div class="modal-content">
+				<div class="col-12 user-img">
+					<img src="static/img/user.png" th:src="@{/img/user.png}" />
+				</div>
+				<form class="col-12" th:action="@{/logView}" method="get">
+<!-- 					<div class="form-group" id="ambiente-previo-group"> -->
+					<div class="form-group">
+						<select class="form-control" name="ambientePrevio">
+							<option value="test">Test</option>
+							<option value="calidad">Calidad</option>
+						</select>
+					</div>
+<!-- 					<div class="form-group" id="log-group"> -->
+					<div class="form-group">
+						<select class="form-control" name="log">
+							<option value="OTP">Log OTP</option>
+							<option value="HOST">Traza Host</option>
+							<option value="DSE">Log DSE</option>
+						</select>
+					</div>
+			        <div class="form-group" id="calendar-group">
+			            <input class="form-control" data-date-format="yyyy/mm/dd" id="datepicker" name="datepicker">
+			        </div>
+
+
+					<script type="text/javascript">
+						$('#datepicker').datepicker({
+							weekStart : 7,
+							locale: 'es',
+							daysOfWeekHighlighted : "6,0",
+							autoclose : true,
+							todayHighlight : true,
+							startDate: 0,
+							endDate: new Date()
+						});
+						
+						$('#datepicker').datepicker("setDate", new Date());
+
+					</script>
+					<div class="form-group" id="license-group">
+						<input type="password" class="form-control"
+							placeholder="Ingresar DNI" name="dni" />
+					</div>
+					<button type="submit" class="btn btn-primary">
+						<i class="fas fa-sign-in-alt"></i> Generar Log
+					</button>
+				</form>
+				<div th:if="${param.error}" class="alert alert-danger" role="alert">
+					Invalido usuario y/o contraseña.</div>
+				<div th:if="${param.logout}" class="alert alert-success"
+					role="alert">You have been logged out.</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
